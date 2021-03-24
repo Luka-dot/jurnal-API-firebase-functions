@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import db from './config/firebase';
+import { db } from './config/firebase';
 
 type EntryType = {
     title: string,
