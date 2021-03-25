@@ -25,14 +25,24 @@ const addEntry = async (req: Request, res: Response) => {
 
         entry.set(entryObject);
 
-        res.status(200).send({
+        return res.status(200).send({
             status: 'success',
             message: 'entry added successfully',
             data: entryObject
         });
     } catch (error) {
-        res.status(500).json(error.message)
+        return res.status(500).json(error.message);
     }
 };
 
-export { addEntry };
+const getAllEntries = async (req: Request, res: Response) => {
+    try {
+      const allEntries = await db.collection('entries').get();
+
+      return res.status(200).json(allEntries.docs);
+    } catch (error) {
+       return res.status(500).json(error.message);
+    }
+};
+
+export { addEntry, getAllEntries };
